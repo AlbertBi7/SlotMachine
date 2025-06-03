@@ -1,8 +1,49 @@
-
+import random
 
 MAX_LINES = 3
 MAX_BET= 100
 MIN_BET=1
+
+ROWS = 3
+COLS = 3
+
+symbolCount = {
+    'A':2,
+    'B':4,
+    'C':6,
+    'D':8
+}
+
+def getSlotSpin(rows,cols,symbols):
+    allSymbols=[]
+    for symbol , symbolCount in symbols.items():
+        for _ in range(symbolCount):
+            allSymbols.append(symbol)
+
+    column = []
+
+    for i in range(cols):
+        column = []
+        currentSymbols = allSymbols[:]
+        for j in range(rows):
+            value = random.choice(currentSymbols)
+            currentSymbols.remove(value)
+            column.append(value)
+
+        column.append(column)
+
+    return column
+
+def printSlot (columns):
+    for i in range(len(columns[0])):
+        for j, column in columns:
+            if( i!=len(columns)-1):
+                print(columns[i], "|")
+            else:
+                print(column[i])
+
+
+
 
 
 def deposit():
@@ -64,4 +105,3 @@ def main():
     print(f"You are betting ${bet} on {lines} lines: ${total_bet}")
     
 
-main()
